@@ -1,0 +1,39 @@
+{
+    "prefix": "!",
+    "weather_api_key": "a833cae3c59c5907e17574996fbe05b3",
+    "default_city": "Bangkok",
+    "guilds": {
+        "guild_id_1": {
+            "welcome_channel_id": "channel_id_1",
+            "quit_channel_id": "channel_id_2"
+        },
+        "guild_id_2": {
+            "welcome_channel_id": "channel_id_3",
+            "quit_channel_id": "channel_id_4"
+        },
+        "guild_id_3": {
+            "welcome_channel_id": "channel_id_5",
+            "quit_channel_id": "channel_id_6"
+        },
+        "guild_id_4": {
+            "welcome_channel_id": "channel_id_7",
+            "quit_channel_id": "channel_id_8"
+        },
+        "guild_id_5": {
+            "welcome_channel_id": "channel_id_9",
+            "quit_channel_id": "channel_id_10"
+        },
+        "guild_id_6": {
+            "welcome_channel_id": "channel_id_11",
+            "quit_channel_id": "channel_id_12"
+        },
+        "1242158700236636200": {
+            "welcome_channel_id": 1245257473171132448,
+            "quit_channel_id": 1245257473171132448
+        },
+        "888357875938885632": {
+            "welcome_channel_id": 932351395397517373,
+            "quit_channel_id": 932351414469029968
+        }
+    }
+}
