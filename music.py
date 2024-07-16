@@ -11,6 +11,7 @@ class Music(commands.Cog):
         self.current_song = None
         self.voice_client = None
         self.queue = []
+        self.client.add_listener(self.on_voice_state_update)
 
     @commands.command()
     async def play(self, ctx, *, search: str):
@@ -71,14 +72,15 @@ class Music(commands.Cog):
         if voice_client and voice_client.is_playing():
             voice_client.stop()
             self.is_looping = False
-            #await ctx.send("เพลงถูกหยุดแล้ว!")
+            await ctx.send("เพลงถูกหยุดแล้ว!")
+            await self.check_and_disconnect(ctx)
 
     @commands.command()
     async def skip(self, ctx):
         voice_client = ctx.guild.voice_client
         if voice_client and voice_client.is_playing():
             voice_client.stop()
-            #await ctx.send("เพลงถัดไป!")
+            await ctx.send("เพลงถัดไป!")
 
     @commands.command()
     async def pause(self, ctx):
@@ -133,6 +135,18 @@ class Music(commands.Cog):
             await self.announce_next_song(ctx, title, thumbnail)
         else:
             voice_client = ctx.guild.voice_client
+            await self.check_and_disconnect(ctx)
+
+    async def check_and_disconnect(self, ctx):
+        await asyncio.sleep(1)  # รอ 1 วินาทีเพื่อเช็คว่ามีใครอยู่ใน voice channel ไหม
+        voice_client = ctx.guild.voice_client
+        if voice_client and len(voice_client.channel.members) == 1:  # ถ้าบอทเป็นสมาชิกคนเดียวในช่อง
+            await voice_client.disconnect()
+
+    @commands.Cog.listener()
+    async def on_voice_state_update(self, member, before, after):
+        voice_client = member.guild.voice_client
+        if voice_client and len(voice_client.channel.members) == 1:  # ถ้าบอทเป็นสมาชิกคนเดียวในช่อง
             await voice_client.disconnect()
 
 async def setup(client):
